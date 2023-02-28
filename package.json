@@ -1,0 +1,46 @@
+{
+  "name": "nuxt-pageviews",
+  "version": "1.0.0",
+  "description": "Nuxt Page View Counts sourced from Google Analytics",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.2.2",
+    "defu": "^6.1.2"
+  },
+  "devDependencies": {
+    "@google-analytics/data": "^3.2.1",
+    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxt/module-builder": "^0.2.1",
+    "@nuxt/schema": "^3.2.2",
+    "@nuxt/test-utils": "^3.2.2",
+    "@vitest/ui": "^0.29.1",
+    "changelogen": "^0.4.1",
+    "eslint": "^8.34.0",
+    "nuxt": "^3.2.2",
+    "unstorage": "^1.1.5",
+    "vitest": "^0.28.5"
+  }
+}
