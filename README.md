@@ -15,7 +15,7 @@ It is built with Vue 3, Typescript, and H3.
 - SSR Support
 - Cached responses from the Google Analytics Data API
 
-## Configuration
+## Installation
 
 1. Add `nuxt-pageviews` dependency to your project
 
@@ -40,7 +40,7 @@ export default defineNuxtConfig({
 })
 ```
 
-
+## Configuration
 
 ### Google Analytics Setup
 
@@ -51,27 +51,24 @@ Here are the steps to set up credentials for use with @google-analytics/data:
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
 1. Create a new project or select an existing project.
 1. Enable the Google Analytics API for your project:
-  2. Go to the APIs & Services dashboard, click on "Enable
-     APIs and Services", and search for "Google Analytics API". Then click "Enable".
+2. Go to the APIs & Services dashboard, click on "Enable
+   APIs and Services", and search for "Google Analytics API". Then click "Enable".
 1. Create credentials for your project:
-  2. Go to the "Credentials" page in the APIs & Services dashboard and
-     click "Create credentials". Select "Service Account" as the credential type and enter the required information.
-     3. Make sure to add the appropriate scopes for the API you're using (in this case,` https://www.googleapis.com/auth/analytics.readonly`).
+2. Go to the "Credentials" page in the APIs & Services dashboard and
+   click "Create credentials". Select "Service Account" as the credential type and enter the required information.
+  3. Make sure to add the appropriate scopes for the API you're using (in this case,` https://www.googleapis.com/auth/analytics.readonly`).
 1. Once you've created the service account, download the JSON key file for the service account. This file will contain
    the private key that you'll need to authenticate with the API, as well as the service account "email" address you will need to add as a user to your Analytics property.
 
-## Nuxt Configuration
+### Nuxt Configuration
 
 To use this plugin, you need to provide a Google service account credentials file, a Google Analytics property ID, and
 an endpoint for the API that will serve the data.
 
-In your `nuxt.config.js` file, add the plugin to the `modules` section, and configure the options for the module:
+In your `nuxt.config.js` file, configure the options for the module:
 
 ```ts
 export default {
-  modules: [
-    "nuxt-pageviews",
-  ],
   pageViews: {
     credentialsFile: "./src/creds.json",
     propertyId: "12345678",
@@ -85,6 +82,7 @@ export default {
 You can use the `usePageViews` composable to access the page views count for a specific page:
 
 ```vue
+
 <template>
   <div>
     <div>Blog views: {{ views }}</div>
@@ -101,6 +99,7 @@ const views = await usePageViews()
 You can also pull the counts for other paths:
 
 ```vue
+
 <template>
   <div>
     <div>Page views: {{ views }}</div>
