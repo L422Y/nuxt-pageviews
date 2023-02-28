@@ -1,5 +1,7 @@
 # Changelog
 
+## v1.0.1
+
 ### [1.0.0] - 2023-02-28
 * Initial release
 
