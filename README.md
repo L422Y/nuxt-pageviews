@@ -56,6 +56,7 @@ Here are the steps to set up credentials for use with @google-analytics/data:
 1. Create credentials for your project:
   2. Go to the "Credentials" page in the APIs & Services dashboard and
      click "Create credentials". Select "Service Account" as the credential type and enter the required information.
+     3. Make sure to add the appropriate scopes for the API you're using (in this case,` https://www.googleapis.com/auth/analytics.readonly`).
 1. Once you've created the service account, download the JSON key file for the service account. This file will contain
    the private key that you'll need to authenticate with the API, as well as the service account "email" address you will need to add as a user to your Analytics property.
 
