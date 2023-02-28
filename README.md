@@ -1,9 +1,9 @@
 # Nuxt Page Views Module
 
-[npm version][npm-version-href]
-[npm downloads][npm-downloads-href]
-[License][license-href]
-[Nuxt][nuxt-href]
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![License][license-src]][license-href]
+[![Nuxt][nuxt-src]][nuxt-href]
 
 This is a module for Nuxt that provides page views tracking using Google Analytics Data API.
 
