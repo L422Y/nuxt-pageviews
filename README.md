@@ -9,13 +9,13 @@ This is a module for Nuxt that provides page views tracking using Google Analyti
 
 It is built with Vue 3, Typescript, and H3.
 
-## Features
+### Features
 
 - Quick setup if you're already running Google Analytics
 - SSR Support
 - Cached responses from the Google Analytics Data API
 
-## Quick Setup
+## Configuration
 
 1. Add `nuxt-pageviews` dependency to your project
 
@@ -40,24 +40,46 @@ export default defineNuxtConfig({
 })
 ```
 
-## Usage
 
-To use this plugin, you need to provide a Google service account credentials file, a Google Analytics property ID, and an endpoint for the API that will serve the data.
 
-In your `nuxt.config.js` file, add the plugin to the `buildModules` section:
+### Google Analytics Setup
+
+You will need to configure a new service account, and add its email address to the GA property you would like to access.
+
+Here are the steps to set up credentials for use with @google-analytics/data:
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+1. Create a new project or select an existing project.
+1. Enable the Google Analytics API for your project:
+  2. Go to the APIs & Services dashboard, click on "Enable
+     APIs and Services", and search for "Google Analytics API". Then click "Enable".
+1. Create credentials for your project:
+  2. Go to the "Credentials" page in the APIs & Services dashboard and
+     click "Create credentials". Select "Service Account" as the credential type and enter the required information.
+1. Once you've created the service account, download the JSON key file for the service account. This file will contain
+   the private key that you'll need to authenticate with the API, as well as the service account "email" address you will need to add as a user to your Analytics property.
+
+## Nuxt Configuration
+
+To use this plugin, you need to provide a Google service account credentials file, a Google Analytics property ID, and
+an endpoint for the API that will serve the data.
+
+In your `nuxt.config.js` file, add the plugin to the `modules` section, and configure the options for the module:
 
 ```ts
 export default {
-    buildModules: [
-        "nuxt-pageviews",
-    ],
-    pageViews: {
-        credentialsFile: "./src/google-service-account.json",
-        propertyId: "12345678",
-        endpoint: "/api/views"
-    }
+  modules: [
+    "nuxt-pageviews",
+  ],
+  pageViews: {
+    credentialsFile: "./src/creds.json",
+    propertyId: "12345678",
+    endpoint: "/api/views"
+  }
 }
 ```
+
+## Using
 
 You can use the `usePageViews` composable to access the page views count for a specific page:
 
@@ -82,12 +104,12 @@ You can also pull the counts for other paths:
   <div>
     <div>Page views: {{ views }}</div>
     <div>Blog views: {{ blogViews }}</div>
-    <div>Project Listing views: {{ projectViews }}</div>
+    <div>Project List views: {{ projectViews }}</div>
   </div>
 </template>
 
 <script setup>
-import { usePageViews } from "#imports"
+import {usePageViews} from "#imports"
 
 const views = await usePageViews()
 const blogViews = await usePageViews("/blog")
@@ -121,7 +143,7 @@ npm run test:watch
 npm run release
 ```
 
-## [✨  Change Log](/CHANGELOG.md)
+## [✨ Change Log](/CHANGELOG.md)
 
 ## License
 
