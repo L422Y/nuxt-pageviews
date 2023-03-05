@@ -4,6 +4,24 @@
   "description": "Nuxt Page View Counts sourced from Google Analytics",
   "license": "MIT",
   "type": "module",
+  "homepage": "https://github.com/L422Y/nuxt-pageviews",
+  "repository": {
+    "url": "https://github.com/L422Y/nuxt-pageviews"
+  },
+  "author": {
+    "email": "l422y@l422y.com",
+    "name": "Larry Williamson",
+    "url": "https://l422y.com/"
+  },
+  "keywords": [
+    "typescript",
+    "nuxt",
+    "vue",
+    "counter",
+    "visits",
+    "analytics",
+    "google-analytics"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
