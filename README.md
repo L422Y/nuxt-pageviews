@@ -14,6 +14,7 @@ It is built with Vue 3, Typescript, and H3.
 - Quick setup if you're already running Google Analytics
 - SSR Support
 - Cached responses from the Google Analytics Data API
+- Expose `usePageViews()` composable
 
 ## Installation
 
@@ -65,16 +66,16 @@ Here are the steps to set up credentials for use with @google-analytics/data:
 To use this plugin, you need to provide a Google service account credentials file, a Google Analytics property ID, and
 an endpoint for the API that will serve the data.
 
-In your `nuxt.config.js` file, configure the options for the module:
+In your `nuxt.config.ts` file, configure the options for the module:
 
 ```ts
-export default {
+export default defineNuxtConfig({
   pageViews: {
     credentialsFile: "./src/creds.json",
     propertyId: "12345678",
     endpoint: "/api/views"
   }
-}
+})
 ```
 
 ## Using
@@ -82,18 +83,15 @@ export default {
 You can use the `usePageViews` composable to access the page views count for a specific page:
 
 ```vue
+<script lang="ts" setup>
+const views = await usePageViews()
+</script>
 
 <template>
   <div>
     <div>Blog views: {{ views }}</div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { usePageViews } from "#imports"
-
-const views = await usePageViews()
-</script>
 ```
 
 You can also pull the counts for other paths:
@@ -109,8 +107,6 @@ You can also pull the counts for other paths:
 </template>
 
 <script setup>
-import {usePageViews} from "#imports"
-
 const views = await usePageViews()
 const blogViews = await usePageViews("/blog")
 const projectViews = await usePageViews("/projects")
