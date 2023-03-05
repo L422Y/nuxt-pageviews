@@ -7,7 +7,7 @@
 
 This is a module for Nuxt that provides page views tracking using Google Analytics Data API.
 
-It is built with Vue 3, Typescript, and H3.
+Built with Nuxt/Vue 3, TypeScript, and H3.
 
 ### Features
 
