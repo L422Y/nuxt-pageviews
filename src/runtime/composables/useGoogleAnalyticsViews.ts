@@ -10,10 +10,17 @@ const storage = createStorage({
 
 export const useGoogleAnalyticsViews = async (config: any, analyticsCache: ViewsCache) => {
   let restTimer: any
-  const {credentialsFile, propertyId}: ModuleOptions = config.pageViews
-  const analyticsDataClient = new BetaAnalyticsDataClient({
-    keyFilename: credentialsFile
-  })
+  const {credentialsFile, credentials, propertyId}: ModuleOptions = config.pageViews
+  let opts = {}
+  if (credentials) {
+    opts["credentials"] = credentials
+  } else if (credentialsFile) {
+    opts["keyFilename"] = credentialsFile
+  } else {
+    throw new Error("Unable to locate Google Analytics credentials")
+  }
+
+  const analyticsDataClient = new BetaAnalyticsDataClient(opts)
 
   await storage.setItem("cache:analyticsCacheRefresh", false)
   await storage.setItem("cache:analyticsCacheProcessing", true)

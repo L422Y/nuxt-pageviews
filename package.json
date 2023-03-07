@@ -1,6 +1,6 @@
 {
   "name": "nuxt-pageviews",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Nuxt Page View Counts sourced from Google Analytics",
   "license": "MIT",
   "type": "module",
@@ -46,10 +46,10 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.2.2",
-    "defu": "^6.1.2"
+    "defu": "^6.1.2",
+    "@google-analytics/data": "^3.2.1"
   },
   "devDependencies": {
-    "@google-analytics/data": "^3.2.1",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxt/module-builder": "^0.2.1",
     "@nuxt/schema": "^3.2.2",

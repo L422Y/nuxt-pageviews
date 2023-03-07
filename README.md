@@ -72,6 +72,8 @@ In your `nuxt.config.ts` file, configure the options for the module:
 export default defineNuxtConfig({
   pageViews: {
     credentialsFile: "./src/creds.json",
+    // OR
+    credentials: {/* contents of credentials file */},
     propertyId: "12345678",
     endpoint: "/api/views"
   }

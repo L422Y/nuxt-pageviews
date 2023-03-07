@@ -3,7 +3,19 @@ import defu from "defu"
 import { fileURLToPath } from "node:url"
 
 export interface ModuleOptions {
-  credentialsFile: string
+  credentialsFile?: string
+  credentials?: {
+    type: "service_account"
+    project_id: string,
+    private_key_id: string
+    private_key: string
+    client_email: string
+    client_id: string
+    auth_uri?: string
+    token_ur?: string
+    auth_provider_x509_cert_url?: string
+    client_x509_cert_url: string
+  }
   propertyId: string
   endpoint: string
 }
@@ -14,7 +26,6 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: "pageViews",
   },
   defaults: {
-    credentialsFile: "./src/google-service-account.json",
     propertyId: "5555555",
     endpoint: "/api/views"
   } as ModuleOptions,
