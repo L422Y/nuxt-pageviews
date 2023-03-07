@@ -1,8 +1,10 @@
 # Changelog
 
-* Add capability to include credentials as an object
+
 
 ## v1.0.3
+
+* Add capability to include credentials as an object
 
 ## v1.0.2
 
