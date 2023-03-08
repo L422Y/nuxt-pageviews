@@ -2,6 +2,19 @@
 
 
 
+## v1.0.9
+
+[compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.8...v1.0.9)
+
+
+### 🩹 Fixes
+
+  - Bug fixes ([c9572e4](https://github.com/L422Y/nuxt-pageviews/commit/c9572e4))
+
+### ❤️  Contributors
+
+- Larry W ([@L422Y](http://github.com/L422Y))
+
 ## v1.0.8
 
 [compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.7...v1.0.8)
