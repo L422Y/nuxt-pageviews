@@ -7,7 +7,10 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      pageViewsEndpoint: "/api/hit"
+      pageViews: {
+        endpoint: "/api/hit",
+        exact: false
+      }
     },
     pageViews: {
       credentialsFile: "./playground/src/google-service-account.json",
@@ -15,6 +18,6 @@ export default defineNuxtConfig({
     }
   },
   alias: {
-    "@": createResolver(import.meta.url).resolve('../../../'),
+    "@": createResolver(import.meta.url).resolve("../../../"),
   }
 })

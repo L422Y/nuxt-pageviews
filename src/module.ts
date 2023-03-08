@@ -40,13 +40,13 @@ export default defineNuxtModule<ModuleOptions>({
     const pluginPath = resolve("./runtime/plugin")
 
     nuxt.options.runtimeConfig.pageViews = defu(nuxt.options.runtimeConfig.pageViews, options)
-    nuxt.options.runtimeConfig.public.pageViewsEndpoint = options.endpoint
+    nuxt.options.runtimeConfig.public.pageViews = {endpoint: options.endpoint, exact: options.exact}
     nuxt.options.build.transpile.push(runtimeDir)
 
     const endpoint = options.endpoint
 
     if (!endpoint) {
-      console.warn("You must set a pageViewsEndpoint in runtimeConfig.public!")
+      console.warn("You must set a pageViews.endpoint in runtimeConfig.public!")
     }
 
     addPlugin(pluginPath)
