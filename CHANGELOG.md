@@ -12,6 +12,7 @@
 ### 🏡 Chore
 
   - Change value type to number ([949c9a5](https://github.com/L422Y/nuxt-pageviews/commit/949c9a5))
+  - Add `exact` configuration option
 
 ### ❤️  Contributors
 
