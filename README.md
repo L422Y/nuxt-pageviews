@@ -75,7 +75,8 @@ export default defineNuxtConfig({
     // OR
     credentials: {/* contents of credentials file */},
     propertyId: "12345678",
-    endpoint: "/api/views"
+    endpoint: "/api/views",
+    exact: false // if exact is false, the module will merge urls that are the same when the trailing slash is removed
   }
 })
 ```

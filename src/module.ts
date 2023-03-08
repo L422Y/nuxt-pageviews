@@ -18,6 +18,10 @@ export interface ModuleOptions {
   }
   propertyId: string
   endpoint: string
+  /**
+   * Get views for exact URLs, do not merge views for URLs that may or may not have a trailing slash
+   */
+  exact: boolean
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -27,7 +31,8 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     propertyId: "5555555",
-    endpoint: "/api/views"
+    endpoint: "/api/views",
+    exact: false
   } as ModuleOptions,
   setup(options, nuxt) {
     const {resolve} = createResolver(import.meta.url)

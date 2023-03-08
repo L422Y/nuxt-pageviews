@@ -10,7 +10,7 @@ const storage = createStorage({
 
 export const useGoogleAnalyticsViews = async (config: any, analyticsCache: ViewsCache) => {
   let restTimer: any
-  const {credentialsFile, credentials, propertyId}: ModuleOptions = config.pageViews
+  const {credentialsFile, credentials, propertyId, exact}: ModuleOptions = config.pageViews
   let opts = {}
   if (credentials) {
     opts["credentials"] = credentials
@@ -41,13 +41,19 @@ export const useGoogleAnalyticsViews = async (config: any, analyticsCache: Views
     },
   })
 
-  const results: { [key: string]: string } = {}
+  const results: { [key: string]: number } = {}
   if (response.rows) {
     for (const row of response.rows) {
       if (row && row.dimensionValues && row.dimensionValues.length > 0 && row.metricValues) {
-        const key = row.dimensionValues[0].value as string
-        // @ts-ignore
-        results[key] = row.metricValues[0].value as number
+        let key = row.dimensionValues[0].value as string
+        if(!exact) {
+          key = key.replace(/\/$/,'')
+        }
+        if(key in results) {
+          results[key] += parseInt(row.metricValues[0].value)
+        }else {
+          results[key] = parseInt(row.metricValues[0].value)
+        }
       }
     }
     await storage.setItem("cache:analytics", results)

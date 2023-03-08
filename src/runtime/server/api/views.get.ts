@@ -23,8 +23,11 @@ export default defineEventHandler(async (event) => {
   appendHeader(event, "Content-Type", "application/json")
 
   const query: QueryObject = getQuery(event)
-  const path: string = query.path as string
-  const config = useRuntimeConfig()
+  let path: string = query.path as string
+  const config = await useRuntimeConfig()
+  if(!config.exact) {
+    path = path.replace(/\/$/,'')
+  }
 
   const shouldRefresh = !analyticsCacheProcessing && ( analyticsCache === null || analyticsCacheRefresh )
 
