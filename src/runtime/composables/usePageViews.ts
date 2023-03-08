@@ -6,7 +6,13 @@ export const usePageViews = async (path?: string | undefined) => {
   if (!path) {
     path = useRoute().path
   }
+
   if (path !== undefined) {
+
+    const {exact} = useRuntimeConfig().pageViews
+    if (!exact) {
+      path = path.replace(/\$/, "")
+    }
     const allPageViews = await useState<{ [key: string]: string }>("pageviews", () => ( {} ))
     const views: Ref<string> = ref("0")
     if (process.client) {
