@@ -2,6 +2,19 @@
 
 
 
+## v1.0.8
+
+[compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.7...v1.0.8)
+
+
+### 🩹 Fixes
+
+  - Properly set up exact config ([5347d23](https://github.com/L422Y/nuxt-pageviews/commit/5347d23))
+
+### ❤️  Contributors
+
+- Larry W ([@L422Y](http://github.com/L422Y))
+
 ## v1.0.7
 
 [compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.6...v1.0.7)
