@@ -1,1 +1,1 @@
-export type ViewsCache = { [key: string]: string }
+export type ViewsCache = { [key: string]: number }
