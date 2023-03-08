@@ -2,6 +2,19 @@
 
 
 
+## v1.0.7
+
+[compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.6...v1.0.7)
+
+
+### 🩹 Fixes
+
+  - Import useRuntimeConfig ([b22cb02](https://github.com/L422Y/nuxt-pageviews/commit/b22cb02))
+
+### ❤️  Contributors
+
+- Larry W ([@L422Y](http://github.com/L422Y))
+
 ## v1.0.6
 
 [compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.5...v1.0.6)
