@@ -2,6 +2,19 @@
 
 
 
+## v1.0.6
+
+[compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.5...v1.0.6)
+
+
+### 🏡 Chore
+
+  - Update composable to honor exact option ([fe3f8c6](https://github.com/L422Y/nuxt-pageviews/commit/fe3f8c6))
+
+### ❤️  Contributors
+
+- Larry W ([@L422Y](http://github.com/L422Y))
+
 ## v1.0.5
 
 ## v1.0.4
