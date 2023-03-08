@@ -1,4 +1,4 @@
-import { useNuxtApp, useRoute, useState } from "#app"
+import { useRuntimeConfig, useNuxtApp, useRoute, useState } from "#app"
 import { ref } from "#imports"
 import { Ref, watch } from "vue"
 
