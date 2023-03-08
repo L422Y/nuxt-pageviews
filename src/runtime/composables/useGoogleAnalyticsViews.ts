@@ -28,7 +28,7 @@ export const useGoogleAnalyticsViews = async (config: any, analyticsCache: Views
     property: `properties/${propertyId}`,
     dimensions: [{"name": "pagePath"}],
     "dateRanges": [{"startDate": "2018-12-31", "endDate": "2099-01-01"},],
-    metrics: [{"name": "totalUsers"}],
+    metrics: [{"name": "screenViews"}],
     dimensionFilter: {
       "filter":
         {
