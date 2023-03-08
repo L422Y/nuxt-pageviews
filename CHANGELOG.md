@@ -2,6 +2,8 @@
 
 
 
+## v1.0.5
+
 ## v1.0.4
 
 [compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.3...v1.0.4)
