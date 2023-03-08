@@ -9,20 +9,17 @@ export const usePageViews = async (path?: string | undefined) => {
 
   if (path !== undefined) {
 
-
     const allPageViews = await useState<{ [key: string]: string }>("pageviews", () => ( {} ))
     const views: Ref<string> = ref("0")
+    const {exact} =  useNuxtApp().$config.public.pageViews
+    if (!exact && path != "/") {
+      path = path.replace(/\/$/, "")
+    }
+
     if (process.client) {
-
-      const {exact} =  useNuxtApp().$config.public.pageViews
-      if (!exact) {
-        path = path.replace(/\$/, "")
-      }
-
       const unwatch = watch(allPageViews.value, (allPageViews: { [key: string]: string }) => {
         views.value = allPageViews[`${path}`]
       })
-
       useNuxtApp().hook("page:start", () => {
         unwatch()
       })

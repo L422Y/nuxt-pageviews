@@ -46,7 +46,7 @@ export const useGoogleAnalyticsViews = async (config: any, analyticsCache: Views
     for (const row of response.rows) {
       if (row && row.dimensionValues && row.dimensionValues.length > 0 && row.metricValues) {
         let key = row.dimensionValues[0].value as string
-        if(!exact) {
+        if (!exact && key != "/") {
           key = key.replace(/\/$/,'')
         }
         if(key in results) {
