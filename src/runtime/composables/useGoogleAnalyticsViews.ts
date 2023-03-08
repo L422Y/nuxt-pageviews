@@ -27,8 +27,8 @@ export const useGoogleAnalyticsViews = async (config: any, analyticsCache: Views
   const [response] = await analyticsDataClient.runReport({
     property: `properties/${propertyId}`,
     dimensions: [{"name": "pagePath"}],
-    "dateRanges": [{"startDate": "2018-12-31", "endDate": "today"},],
-    metrics: [{"name": "screenPageViews"}],
+    "dateRanges": [{"startDate": "2018-12-31", "endDate": "2099-01-01"},],
+    metrics: [{"name": "totalUsers"}],
     dimensionFilter: {
       "filter":
         {
