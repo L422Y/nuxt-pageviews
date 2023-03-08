@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
   const query: QueryObject = getQuery(event)
   let path: string = query.path as string
   const config = await useRuntimeConfig()
-  if(!config.exact) {
+  if(!config.exact && path != "/") {
     path = path.replace(/\/$/,'')
   }
 

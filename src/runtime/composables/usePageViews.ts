@@ -1,17 +1,16 @@
-import { useRuntimeConfig, useNuxtApp, useRoute, useState } from "#app"
+import { useNuxtApp, useRoute, useRuntimeConfig, useState } from "#app"
 import { ref } from "#imports"
 import { Ref, watch } from "vue"
-
 export const usePageViews = async (path?: string | undefined) => {
   if (!path) {
     path = useRoute().path
   }
 
   if (path !== undefined) {
-
+    const config = useRuntimeConfig()
     const allPageViews = await useState<{ [key: string]: string }>("pageviews", () => ( {} ))
     const views: Ref<string> = ref("0")
-    const {exact} =  useNuxtApp().$config.public.pageViews
+    const {exact} = config.pageViews
     if (!exact && path != "/") {
       path = path.replace(/\/$/, "")
     }
