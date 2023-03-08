@@ -2,6 +2,19 @@
 
 
 
+## v1.0.4
+
+[compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.3...v1.0.4)
+
+
+### 🏡 Chore
+
+  - Change value type to number ([949c9a5](https://github.com/L422Y/nuxt-pageviews/commit/949c9a5))
+
+### ❤️  Contributors
+
+- Larry W ([@L422Y](http://github.com/L422Y))
+
 ## v1.0.3
 
 * Add capability to include credentials as an object
