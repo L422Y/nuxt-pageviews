@@ -1,6 +1,6 @@
 {
   "name": "nuxt-pageviews",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Nuxt Page View Counts sourced from Google Analytics",
   "license": "MIT",
   "type": "module",
