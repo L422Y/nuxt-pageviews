@@ -76,6 +76,7 @@ export default defineNuxtConfig({
     credentials: {/* contents of credentials file */},
     propertyId: "12345678",
     endpoint: "/api/views",
+    preload: true, // preload analytics data on startup (default: true)
     exact: false, // if exact is false, the module will merge urls that are the same when the trailing slash is removed
     startDate: "2021-01-01", // Get data starting at this date
     cacheTimeout: 15 * 60, // Cache half-life (in seconds)
