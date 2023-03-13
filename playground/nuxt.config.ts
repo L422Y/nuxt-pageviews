@@ -11,7 +11,8 @@ export default defineNuxtConfig({
       endpoint: "/api/views",
       startDate: "2021-01-01",
       cacheTimeout: 15 * 60,
-      debug: false
+      debug: true,
+      preload: true
     },
     public: {},
   }

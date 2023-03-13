@@ -10,40 +10,50 @@ import { ViewsCache } from "../../../module"
 export default defineLazyEventHandler(async () => {
   const config = await useRuntimeConfig()
   const storage = await createStorage({driver: memoryDriver()})
+
+  await storage.setItem("cache:pageViewsCacheRefresh", false)
+  await storage.setItem("cache:pageViewsCacheProcessing", false)
+
   const providers = {
     "googleAnalytics": googleAnalytics
   }
   const provider = config.pageViews.provider
 
   const refreshAnalyticsCache = async () => {
-    let analyticsCache: ViewsCache = <ViewsCache>( await storage.getItemRaw("cache:analytics") )
-    const analyticsCacheProcessing = ( await storage.getItem("cache:analyticsCacheProcessing") ) as boolean
-    const analyticsCacheRefresh = ( await storage.getItem("cache:analyticsCacheRefresh") ) as boolean
+    let analyticsCache: ViewsCache = <ViewsCache>( await storage.getItemRaw("cache:pageViews") )
+    const analyticsCacheProcessing = ( await storage.getItem("cache:pageViewsCacheProcessing") ) as boolean
+    const analyticsCacheRefresh = ( await storage.getItem("cache:pageViewsCacheRefresh") ) as boolean
     const shouldRefresh = !analyticsCacheProcessing && ( analyticsCache === null || analyticsCacheRefresh )
     if (shouldRefresh) {
       const providerFunction = providers[provider]
-      await storage.setItem("cache:analyticsCacheRefresh", false)
-      await storage.setItem("cache:analyticsCacheProcessing", true)
+      await storage.setItem("cache:pageViewsCacheRefresh", false)
+      await storage.setItem("cache:pageViewsCacheProcessing", true)
 
       if (analyticsCache === null) {
         // Wait for data
         analyticsCache = await providerFunction(config, storage)
-        await storage.setItemRaw("cache:analytics", analyticsCache)
-        await storage.setItem("cache:analyticsCacheProcessing", false)
+        await storage.setItemRaw("cache:pageViews", analyticsCache)
+        await storage.setItem("cache:pageViewsCacheProcessing", false)
 
       } else {
         // Send stale data and refresh in the background
         providerFunction(config, storage).then(async (analyticsCache) => {
-          await storage.setItemRaw("cache:analytics", analyticsCache)
-          await storage.setItem("cache:analyticsCacheRefresh", false)
+          await storage.setItemRaw("cache:pageViews", analyticsCache)
+          await storage.setItem("cache:pageViewsCacheRefresh", false)
         })
       }
       setTimeout(async () => {
         if (config.pageViews.debug) console.log("pageViews:timeout:needRefresh")
-        await storage.setItem("cache:analyticsCacheRefresh", true)
+        await storage.setItem("cache:pageViewsCacheRefresh", true)
       }, config.pageViews.cacheTimeout * 1000)
     }
     return analyticsCache
+  }
+
+  if(config.pageViews.preload) {
+    if (config.pageViews.debug) console.log("pageViews:preload")
+
+    await refreshAnalyticsCache()
   }
 
   return defineEventHandler(async (event) => {
