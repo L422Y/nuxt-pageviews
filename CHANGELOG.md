@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.0.12
+
+[compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.11...v1.0.12)
+
+
+### 🚀 Enhancements
+
+  - Add `startDate`, `cacheTimeout` options, fix storage and refresh, initial work ([c7942c6](https://github.com/L422Y/nuxt-pageviews/commit/c7942c6))
+
+### 🏡 Chore
+
+  - Initial work for supporting additional analytics data sources ([40e7134](https://github.com/L422Y/nuxt-pageviews/commit/40e7134))
+
+### ❤️  Contributors
+
+- Larry W ([@L422Y](http://github.com/L422Y))
+
 ## v1.0.11
 
   - Bug fixes
