@@ -1,17 +1,11 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data"
 import { ModuleOptions } from "../../module"
-import { ViewsCache } from "../types"
-import { createStorage } from "unstorage"
-import memoryDriver from "unstorage/drivers/memory"
 
-const storage = createStorage({
-  driver: memoryDriver(),
-})
-
-export const useGoogleAnalyticsViews = async (config: any, analyticsCache: ViewsCache) => {
+export const googleAnalytics = async (config: any, storage: any) => {
   let restTimer: any
-  const {credentialsFile, credentials, propertyId, exact}: ModuleOptions = config.pageViews
+  const {credentialsFile, credentials, propertyId, exact, startDate, debug}: ModuleOptions = config.pageViews
   let opts = {}
+
   if (credentials) {
     opts["credentials"] = credentials
   } else if (credentialsFile) {
@@ -20,14 +14,13 @@ export const useGoogleAnalyticsViews = async (config: any, analyticsCache: Views
     throw new Error("Unable to locate Google Analytics credentials")
   }
 
+  if (debug) console.time("provider:googleAnalytics:refresh")
   const analyticsDataClient = new BetaAnalyticsDataClient(opts)
 
-  await storage.setItem("cache:analyticsCacheRefresh", false)
-  await storage.setItem("cache:analyticsCacheProcessing", true)
   const [response] = await analyticsDataClient.runReport({
     property: `properties/${propertyId}`,
     dimensions: [{"name": "pagePath"}],
-    "dateRanges": [{"startDate": "2018-12-31", "endDate": "2099-01-01"},],
+    "dateRanges": [{"startDate": startDate, "endDate": "2099-01-01"},],
     metrics: [{"name": "screenPageViews"}],
     dimensionFilter: {
       "filter":
@@ -47,23 +40,16 @@ export const useGoogleAnalyticsViews = async (config: any, analyticsCache: Views
       if (row && row.dimensionValues && row.dimensionValues.length > 0 && row.metricValues) {
         let key = row.dimensionValues[0].value as string
         if (!exact && key != "/") {
-          key = key.replace(/\/$/,'')
+          key = key.replace(/\/$/, "")
         }
-        if(key in results) {
+        if (key in results) {
           results[key] += parseInt(row.metricValues[0].value)
-        }else {
+        } else {
           results[key] = parseInt(row.metricValues[0].value)
         }
       }
     }
-    await storage.setItem("cache:analytics", results)
-    await storage.setItem("cache:analyticsCacheProcessing", false)
-    analyticsCache = results
-
-    clearTimeout(restTimer)
-    setTimeout(async () => {
-      await storage.setItem("cache:analyticsCacheRefresh", true)
-    }, 15 * 60 * 1000)
+    if (debug) console.timeEnd("provider:googleAnalytics:refresh")
   }
-  return analyticsCache
+  return results
 }

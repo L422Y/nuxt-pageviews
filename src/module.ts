@@ -2,6 +2,13 @@ import { addPlugin, addServerHandler, createResolver, defineNuxtModule } from "@
 import defu from "defu"
 import { fileURLToPath } from "node:url"
 
+
+export type ViewsCache = { [key: string]: number }
+
+export enum PageViewsProvider {
+  GoogleAnalytics = "googleAnalytics"
+}
+
 export interface ModuleOptions {
   credentialsFile?: string
   credentials?: {
