@@ -1,29 +1,14 @@
-import { appendHeader, defineEventHandler, getQuery, } from "h3"
+import { appendHeader, defineEventHandler, defineLazyEventHandler, getQuery, } from "h3"
 import { QueryObject } from "ufo"
-import { useGoogleAnalyticsViews } from "../../composables/useGoogleAnalyticsViews"
 import { useRuntimeConfig } from "#imports"
 import memoryDriver from "unstorage/drivers/memory"
 import { ViewsCache } from "../../types"
 import { createStorage } from "unstorage"
+import memoryDriver from "unstorage/drivers/memory"
+import { ViewsCache } from "../../../module"
 
-const storage = createStorage({
-  driver: memoryDriver(),
-})
 
-storage.setItemRaw("cache:analytics", null)
-storage.setItemRaw("cache:analyticsCacheProcessing", false)
-storage.setItemRaw("cache:analyticsCacheRefresh", false)
-
-export default defineEventHandler(async (event) => {
-  let analyticsCache: ViewsCache = ( await storage.getItemRaw("cache:analytics") ) as ViewsCache
-  const analyticsCacheProcessing = ( await storage.getItemRaw("cache:analyticsCacheProcessing") ) as boolean
-  const analyticsCacheRefresh = ( await storage.getItemRaw("cache:analyticsCacheRefresh") ) as boolean
-
-  appendHeader(event, "Access-Control-Allow-Origin", "*")
-  appendHeader(event, "Content-Type", "application/json")
-
-  const query: QueryObject = getQuery(event)
-  let path: string = query.path as string
+export default defineLazyEventHandler(async () => {
   const config = await useRuntimeConfig()
   if(!config.exact && path != "/") {
     path = path.replace(/\/$/,'')

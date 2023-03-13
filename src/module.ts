@@ -17,11 +17,16 @@ export interface ModuleOptions {
     client_x509_cert_url: string
   }
   propertyId: string
-  endpoint: string
+  endpoint?: string
   /**
    * Get views for exact URLs, do not merge views for URLs that may or may not have a trailing slash
    */
-  exact: boolean
+  exact?: boolean
+  startDate?: string
+  debug?: boolean
+  preload?: boolean
+  provider: PageViewsProvider
+  cacheTimeout?: number
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -32,12 +37,14 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     propertyId: "5555555",
     endpoint: "/api/views",
-    exact: false
+    exact: false,
+    startDate: "2018-01-01",
+    provider: PageViewsProvider.GoogleAnalytics,
+    cacheTimeout: 60 * 30
   } as ModuleOptions,
   setup(options, nuxt) {
     const {resolve} = createResolver(import.meta.url)
     const runtimeDir = fileURLToPath(new URL("./runtime", import.meta.url))
-    const pluginPath = resolve("./runtime/plugin")
 
     nuxt.options.runtimeConfig.pageViews = defu(nuxt.options.runtimeConfig.pageViews, options)
     nuxt.options.runtimeConfig.public.pageViews = {endpoint: options.endpoint, exact: options.exact}
@@ -49,6 +56,7 @@ export default defineNuxtModule<ModuleOptions>({
       console.warn("You must set a pageViews.endpoint in runtimeConfig.public!")
     }
 
+    const pluginPath = resolve("./runtime/plugin")
     addPlugin(pluginPath)
 
     addServerHandler({
@@ -64,5 +72,6 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.hook("prepare:types", (options) => {
       options.references.push({path: resolve(nuxt.options.buildDir, "types/pageviews.d.ts")})
     })
+
   }
 })
