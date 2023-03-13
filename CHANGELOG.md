@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.0.13
+
+[compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.12...v1.0.13)
+
+
+### 🚀 Enhancements
+
+  - Option to preload (default) on startup ([0a90458](https://github.com/L422Y/nuxt-pageviews/commit/0a90458))
+
+### 🏡 Chore
+
+  - Update editorconfig ([656f1be](https://github.com/L422Y/nuxt-pageviews/commit/656f1be))
+
+### ❤️  Contributors
+
+- Larry W ([@L422Y](http://github.com/L422Y))
+
 ## v1.0.12
 
 [compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.11...v1.0.12)
