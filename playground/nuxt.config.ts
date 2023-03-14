@@ -1,8 +1,6 @@
-import NuxtPageViews from "../src/module"
-
 export default defineNuxtConfig({
   modules: [
-    NuxtPageViews
+    "../src/module"
   ],
   runtimeConfig: {
     pageViews: {
