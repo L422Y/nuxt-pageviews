@@ -57,7 +57,7 @@
     "@vitest/ui": "^0.29.2",
     "changelogen": "^0.4.1",
     "eslint": "^8.35.0",
-    "nuxt": "^3.2.3",
+    "nuxt": "^3.3.1",
     "unstorage": "^1.4.0",
     "vitest": "^0.28.5"
   }
