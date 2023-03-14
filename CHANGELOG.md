@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.0.14
+
+
+### 🏡 Chore
+
+  - Update README.md (97af79f)
+  - Don't import in config (4a2b50c)
+  - Update nuxt (563314a)
+
+### ❤️  Contributors
+
+- Larry W ([@L422Y](http://github.com/L422Y))
+
 ## v1.0.13
 
 [compare changes](https://github.com/L422Y/nuxt-pageviews/compare/v1.0.12...v1.0.13)
