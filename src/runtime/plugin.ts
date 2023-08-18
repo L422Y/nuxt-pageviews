@@ -3,7 +3,7 @@ import { defineNuxtPlugin, useLazyAsyncData, useRuntimeConfig, useState } from "
 export default defineNuxtPlugin(async (app) => {
   let config = useRuntimeConfig()
   const endpoint = config.public.pageViews.endpoint
-  const pageViews = await useState("pageViews", () => ( {} ))
+  const pageViews = useState("pageViews", () => ( {} ))
   const {data} = await useLazyAsyncData(`views-data`, () => $fetch(`${endpoint}?path=*`))
 
   if (data.value) {

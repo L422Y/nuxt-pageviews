@@ -8,7 +8,7 @@ export const usePageViews = async (path?: string | undefined) => {
 
   if (path !== undefined) {
     const config = useRuntimeConfig()
-    const allPageViews = await useState<{ [key: string]: string }>("pageViews", () => ( {} ))
+    const allPageViews = useState<{ [key: string]: string }>("pageViews", () => ( {} ))
     const views: Ref<string> = ref("0")
     const {exact} = config.pageViews
     if (!exact && path != "/") {

@@ -17,10 +17,10 @@ export const googleAnalytics = async (config: any, storage: any) => {
   if (debug) console.time("provider:googleAnalytics:refresh")
   const analyticsDataClient = new BetaAnalyticsDataClient(opts)
 
-  const [response] = await analyticsDataClient.runReport({
+  const params = {
     property: `properties/${propertyId}`,
     dimensions: [{"name": "pagePath"}],
-    "dateRanges": [{"startDate": startDate, "endDate": "2099-01-01"},],
+    dateRanges: [{"startDate": startDate, "endDate": "today"},],
     metrics: [{"name": "screenPageViews"}],
     dimensionFilter: {
       "filter":
@@ -32,7 +32,10 @@ export const googleAnalytics = async (config: any, storage: any) => {
           }
         }
     },
-  })
+  }
+  if(debug) console.log("provider:googleAnalytics:params", params)
+
+  const [response] = await analyticsDataClient.runReport(params)
 
   const results: { [key: string]: number } = {}
   if (response.rows) {

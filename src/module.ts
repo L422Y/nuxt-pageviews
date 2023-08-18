@@ -46,7 +46,7 @@ export default defineNuxtModule<ModuleOptions>({
     endpoint: "/api/views",
     exact: false,
     preload: true,
-    startDate: "2018-01-01",
+    startDate: "1990-01-01",
     provider: PageViewsProvider.GoogleAnalytics,
     cacheTimeout: 60 * 30
   } as ModuleOptions,
