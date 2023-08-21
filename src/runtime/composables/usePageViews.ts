@@ -6,11 +6,11 @@ export const usePageViews = async (path?: string | undefined) => {
     path = useRoute().path
   }
 
-  if (path !== undefined) {
+  if (path !== void 0 && path !== null && path !== "") {
     const config = useRuntimeConfig()
     const allPageViews = useState<{ [key: string]: string }>("pageViews", () => ( {} ))
     const views: Ref<string> = ref("0")
-    const {exact} = config.pageViews
+    const {exact} = config?.pageViews || {}
     if (!exact && path != "/") {
       path = path.replace(/\/$/, "")
     }
