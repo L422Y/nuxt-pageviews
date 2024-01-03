@@ -42,10 +42,12 @@ export default defineLazyEventHandler(async () => {
           await storage.setItem("cache:pageViewsCacheRefresh", false)
         })
       }
-      setTimeout(async () => {
-        if (config.pageViews.debug) console.log("pageViews:timeout:needRefresh")
-        await storage.setItem("cache:pageViewsCacheRefresh", true)
-      }, config.pageViews.cacheTimeout * 1000)
+      if (process.env?.npm_lifecycle_event !== "generate") {
+        setTimeout(async () => {
+          if (config.pageViews.debug) console.log("pageViews:timeout:needRefresh")
+          await storage.setItem("cache:pageViewsCacheRefresh", true)
+        }, config.pageViews.cacheTimeout * 1000)
+      }
     }
     return analyticsCache
   }
